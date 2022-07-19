@@ -45,15 +45,15 @@ class App {
 
         mongoose.connect(
             `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`, {
-                dbName : "blogDB"
-            }
+            dbName: "blogDB"
+        }
         );
-        
+
     }
 
     public listen(): void {
         this.express.listen(this.port, () => {
-            console.log(`App listening on the port ${this.port}`);
+            console.log(`App listening on the port http://localhost:${this.port}`);
         });
     }
 }
