@@ -9,7 +9,7 @@ class PostService {
      */
     public async create(title: string, body: string, image?: string): Promise<Post> {
         try {
-            const post = await PostModel.create({ title, body, image, });
+            const post = await this.post.create({ title, body, image, });
             return post;
         } catch (error) {
             throw new Error('Unable to create post');

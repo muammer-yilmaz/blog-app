@@ -28,6 +28,7 @@ class App {
         this.express.use(express.json());
         this.express.use(express.urlencoded({ extended: false }));
         this.express.use(compression());
+
     }
 
     private initialiseControllers(controllers: Controller[]): void {

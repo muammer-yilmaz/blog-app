@@ -1,9 +1,9 @@
 import Joi from 'joi';
 
-const create = Joi.object({
+const validate = Joi.object({
     title: Joi.string().required(),
-    image : Joi.string(),
+    image: Joi.string(),
     body: Joi.string().required(),
 });
 
-export default { create };
+export default { validate };

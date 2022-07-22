@@ -1,7 +1,6 @@
 import { Router } from 'express';
-
 interface Controller {
-    path: string;
+    path: String // don't forget to start path with a \ 
     router: Router;
 }
 

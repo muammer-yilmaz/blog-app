@@ -1,9 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import Controller from './post.controller';
+import Controller from '../../utils/interfaces/controller.interface';
 import HttpException from '../../utils/exceptions/http.exception';
 import validationMiddleware from '../../middlewares/validation.middleware';
-import validate from './post.validation';
 import PostService from './post.service';
+import postValidation from './post.validation';
 
 class PostController implements Controller {
     public path = '/posts';
@@ -17,7 +17,7 @@ class PostController implements Controller {
     private initialiseRoutes(): void {
 
         this.router.post(`${this.path}`,
-            validationMiddleware(validate.create), this.create);
+            validationMiddleware(postValidation.validate), this.create);
 
         this.router.get(`${this.path}/:id`, this.getById);
 
@@ -32,7 +32,6 @@ class PostController implements Controller {
 
         try {
             const { title, body, image } = req.body;
-            console.log("alert");
 
             const post = await this.PostService.create(title, body, image);
 
