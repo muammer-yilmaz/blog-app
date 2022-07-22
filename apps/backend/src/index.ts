@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import 'module-alias/register';
-import validateEnv from './src/utils/validateEnv';
+import validateEnv from './utils/validateEnv'
 import App from './app';
-import PostController from './src/resources/post/post.controller';
+import PostController from './resources/post/post.controller';
 //import UserController from '@/resources/user/user.controller';
 
 validateEnv();
