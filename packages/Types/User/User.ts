@@ -1,12 +1,12 @@
 
 interface IUser {
 
-    name: String,
-    surname: String,
-    mail: String,
-    password: String,
-    phone?: String,
-    image?: String,
+    name: string,
+    surname: string,
+    mail: string,
+    password: string,
+    phone?: string,
+    image?: string,
     createdDate?: Date,
 
 }
