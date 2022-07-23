@@ -19,24 +19,43 @@ class UserController implements Controller {
     private initialiseRoutes(): void {
 
         this.router.post(
-            `${this.path}`, validationMiddleware(userValidation.validate), this.create);
+            `${this.path}/register`, validationMiddleware(userValidation.register), this.create
+        );
+
+        this.router.post(
+            `${this.path}/login`, validationMiddleware(userValidation.login), this.login
+        );
 
         this.router.get(
-            `${this.path}`, this.getAll);
+            `${this.path}/getAll`, this.getAll);
     }
 
     private create = async (req: Request, res: Response, next: NextFunction)
         : Promise<Response | void> => {
-
 
         try {
             const user = req.body;
 
             const data = await this.UserService.create(user)
             res.status(200).json({ data });
-        } catch (error) {
-            next(new HttpException(400, "user creation error"));
+        } catch (error: any) {
+            next(new HttpException(400, "" + error.message));
         }
+    }
+
+    private login = async (req: Request, res: Response, next: NextFunction)
+        : Promise<Response | void> => {
+
+        try {
+            const { mail, password } = req.body;
+
+            const token = await this.UserService.login(mail, password);
+            res.status(200).json({ token });
+
+        } catch (error: any) {
+            next(new HttpException(400, error.message));
+        }
+
     }
 
     private getAll = async (req: Request, res: Response, next: NextFunction)
@@ -44,7 +63,8 @@ class UserController implements Controller {
 
         try {
 
-            const users = this.UserService.getAll();
+            const users = await this.UserService.getAll();
+
             res.status(200).json({ users })
         } catch (error) {
             next(new HttpException(400, "user get error"));

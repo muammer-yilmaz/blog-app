@@ -1,7 +1,7 @@
-import { Schema } from 'mongoose';
+import { ObjectId } from 'mongoose';
 
 interface Token extends Object {
-    id: Schema.Types.ObjectId;
+    id: ObjectId;
     expiresIn: number;
 }
 

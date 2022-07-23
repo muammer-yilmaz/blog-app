@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import User from "./user.interface";
+import bcrypt from 'bcrypt';
 
 const UserModel = new Schema({
     name: {
@@ -12,7 +13,8 @@ const UserModel = new Schema({
     },
     mail: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -31,5 +33,19 @@ const UserModel = new Schema({
         required: true
     }
 });
+
+// convert e mail to lowercase
+UserModel.pre<User>('save', async function (next) {
+    if (!this.isModified('password') && !this.isModified('mail')) {
+        return next();
+    }
+    const hash = await bcrypt.hash(this.password, 10);
+
+    this.password = hash;
+    this.mail = this.mail.toLowerCase();
+
+    next();
+});
+
 
 export default model<User>("User", UserModel)

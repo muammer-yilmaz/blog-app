@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const validate = Joi.object(
+const register = Joi.object(
     {
         name: Joi.string().required(),
         surname: Joi.string().required(),
@@ -10,7 +10,13 @@ const validate = Joi.object(
         image: Joi.string(),
         //createdDate: Joi.date()
     }
-
 )
 
-export default { validate }
+const login = Joi.object(
+    {
+        mail: Joi.string().required(),
+        password: Joi.string().required(),
+    }
+)
+
+export default { register, login }
