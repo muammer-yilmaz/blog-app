@@ -21,7 +21,7 @@ const authorizeMiddleware = async (req: Request, res: Response, next: NextFuncti
         );
 
         if (payload instanceof jwt.JsonWebTokenError) {
-            return next(new HttpException(401, 'Unauthorised'));
+            return next(new HttpException(401, 'Unauthorised' + payload));
         }
 
         // const user = await UserModel.findById(payload.id)
@@ -33,8 +33,9 @@ const authorizeMiddleware = async (req: Request, res: Response, next: NextFuncti
         // req.user = user;
 
         return next();
-    } catch (error) {
-        return next(new HttpException(401, 'Unauthorised'));
+    } catch (error: any) {
+        return next(new HttpException(401, 'Unauthorised' + error));
     }
 }
 
+export default authorizeMiddleware;

@@ -1,13 +1,13 @@
-import { Schema , model } from "mongoose";
+import { Schema, model } from "mongoose";
 import Post from './post.interface';
 
 
-const PostModel = new Schema( {
-    title : {
-        type : String,
-        required : true,
+const PostModel = new Schema({
+    title: {
+        type: String,
+        required: true,
     },
-    image : {
+    image: {
         type: String,
         required: false,
     },
@@ -15,6 +15,10 @@ const PostModel = new Schema( {
         type: String,
         required: true,
     },
-});
+    author: {
+        type: String,
+        required: true,
+    },
+}, { timestamps: true });
 
 export default model<Post>('Post', PostModel);

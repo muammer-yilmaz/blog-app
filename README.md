@@ -2,7 +2,7 @@
 
 ## Backend  --> Node.JS, Express, Mongoose
 
-## Frontend --> React
+## Frontend --> React, Chakra UI, Framer Motion
 
 
 ### this project is built with yarn workspaces !!!
@@ -17,9 +17,24 @@ yarn
 ```
 Dependency adding
 ```
-yarn workspace backend add <dependency name>
+yarn workspace <backend | frontend> add <dependency name>
 ```
 
+runs backend server. Execute command from root level
+```bash
+yarn backend
+```
+runs frontend server. Execute command from root level
+```bash
+yarn frontend
+```
+
+To run both servers. Execute command from root level
+```bash
+yarn start
+```
+
+---
 ```
 ! scripts to be added
 ```

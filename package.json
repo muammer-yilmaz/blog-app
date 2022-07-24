@@ -11,8 +11,11 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "yarn --cwd apps/frontend start",
-    "next": "yarn --cwd apps/nextapp dev",
-    "dev": "npm-run-all --parallel start next"
+    "frontend": "yarn --cwd apps/frontend start",
+    "backend": "yarn --cwd apps/backend dev",
+    "start": "concurrently  \"yarn backend\" \"yarn frontend\" "
+  },
+  "dependencies": {
+    "concurrently": "^7.3.0"
   }
 }

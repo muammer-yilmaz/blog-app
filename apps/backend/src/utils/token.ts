@@ -16,6 +16,7 @@ export const verifyToken = async (
             token,
             process.env.JWT_SECRET as jwt.Secret,
             (err, payload) => {
+
                 if (err) return reject(err);
 
                 resolve(payload as Token);

@@ -7,10 +7,10 @@ class PostService {
     /**
      * Create a new post
      */
-    public async create(title: string, body: string, image?: string): Promise<Post> {
+    public async create(post: Post): Promise<Post> {
         try {
-            const post = await this.post.create({ title, body, image, });
-            return post;
+            const data = await this.post.create({ ...post });
+            return data;
         } catch (error) {
             throw new Error('Unable to create post');
         }
@@ -21,8 +21,8 @@ class PostService {
      */
     public async getById(id: String) {
         try {
-            const post = await this.post.findById(id);
-            return post;
+            const data = await this.post.findById(id);
+            return data;
         } catch (error: any) {
             throw new Error('item get error : ' + error);
         }
@@ -33,8 +33,8 @@ class PostService {
      */
     public async getAll() {
         try {
-            const posts = await this.post.find();
-            return posts;
+            const data = await this.post.find({}).select('-body').exec();
+            return data;
         } catch (error: any) {
             throw new Error('item get error : ' + error);
         }
@@ -43,7 +43,6 @@ class PostService {
     /**
      * Delete one item from db
      */
-
     public async deleteItem(id: String) {
 
         try {
