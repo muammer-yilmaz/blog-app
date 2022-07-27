@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 
 const store = configureStore({
-    reducer: {
-
-    }
-})
+    reducer: rootReducer,
+    middleware: [thunk],
+    devTools: true
+});
 
 export default store;

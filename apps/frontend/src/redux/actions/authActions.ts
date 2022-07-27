@@ -1,16 +1,16 @@
-import { GET_USER_START, GET_USER_SUCCESS, LOGIN_START, LOGIN_SUCCESS } from "../../constants/actionTypes";
-import { User } from "../../types/types";
+import { LOGIN_SUCCESS } from "../../constants/actionTypes";
 
+export const loginStart = (mail: string, password: string) => {
 
-export const loginStart = (email: string, password: string) => ({
-    type: LOGIN_START,
-    payload: {
-        email,
-        password
+    return ({
+        type: LOGIN_SUCCESS,
+        payload: {
+            mail: mail,
+            password: password
+        }
     }
-} as const);
+    ) as const;
+}
 
-export const loginSuccess = (auth: User) => ({
-    type: LOGIN_SUCCESS,
-    payload: auth
-} as const);
+
+export type AuthActionType = | ReturnType<typeof loginStart>

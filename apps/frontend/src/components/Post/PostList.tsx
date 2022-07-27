@@ -1,10 +1,10 @@
 import { Box, Stack } from "@chakra-ui/react";
 import React from "react";
-import IPost from "Types/Post/Post";
+import { Post } from "types/types";
 import PostItem from "./PostItem";
 
 interface IProps {
-    items: IPost[]
+    items: Post[]
     display: String
 }
 
@@ -18,7 +18,7 @@ const PostList: React.FC<IProps> = ({ items, display }) => {
                     {
                         items.map(el => {
                             return (
-                                <PostItem  {...el} />
+                                <PostItem  {...el} key={el._id} />
                             )
                         })
                     }
