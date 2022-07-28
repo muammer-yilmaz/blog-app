@@ -1,9 +1,13 @@
 import React from "react";
 
-const Text = () => {
+type IProps = {
+    title: string
+}
+
+const Text: React.FC<IProps> = ({ title }) => {
     return (
         <h1>
-            Merhaba
+            {title}
         </h1>
     )
 }

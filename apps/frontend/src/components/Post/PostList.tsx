@@ -5,17 +5,18 @@ import PostItem from "./PostItem";
 
 interface IProps {
     items: Post[]
-    display: String
 }
 
-const PostList: React.FC<IProps> = ({ items, display }) => {
+const PostList: React.FC<IProps> = ({ items }) => {
+    console.log(items)
 
     return (
         <>
 
             <Box >
-                <Stack direction={"row"} flexWrap="wrap" justify={"center"}>
+                <Stack spacing={5} direction={"row"} flexWrap="wrap" justify={"center"}>
                     {
+
                         items.map(el => {
                             return (
                                 <PostItem  {...el} key={el._id} />

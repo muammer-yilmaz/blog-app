@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import PostList from 'components/Post/PostList';
-import { Post } from 'types/types';
-import { ChakraProvider, DarkMode } from '@chakra-ui/react';
-import axios from 'axios';
+import { ChakraProvider } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { loginStart } from './redux/actions/authActions';
-
+import Navbar from 'components/Shared/Navbar';
+import Text from 'components/Text';
+import Register from 'components/Auth/Register'
+import {
+  BrowserRouter,
+  HashRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Footer from 'components/Shared/Footer';
+import Login from 'components/Auth/Login';
+import HomePage from 'pages/HomePage';
 
 function App() {
 
-  const [items, setItems] = useState<Post[]>([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/posts").then(
-      (data) => {
-        console.log(data.data.post);
-
-        setItems(data.data.post);
-      }
-    )
-    dispatch(loginStart("muammer1@gmail.com", "123456"));
-    //console.log(dispatch);
-
-  }, [dispatch])
+  //const [items, setItems] = useState<Post[]>([]);
+  //const dispatch = useDispatch();
 
   return (
-    <ChakraProvider theme={DarkMode}>
+    <ChakraProvider >
       <div className="App">
-        <PostList {...{ items, display: "vertical" }} >
-
-        </PostList>
+        <Navbar />
+        <HashRouter >
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            {/* <Route path='/login' element={<Login />} /> */}
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </HashRouter>
+        <Footer />
       </div>
     </ChakraProvider>
   );
