@@ -4,12 +4,17 @@ import IUser from 'Types/User/User'
 
 export interface User extends IUser {
     _id: string
+
 }
 
 export interface Post extends IPost {
     _id: string
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 }
 
 export interface IToken {
     token: string
 }
+

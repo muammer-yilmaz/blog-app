@@ -33,7 +33,10 @@ class PostService {
      */
     public async getAll() {
         try {
-            const data = await this.post.find({}).select('-body').exec();
+            const data = await this.post.find({});
+            data.forEach((el) => {
+                el.body = el.body.slice(0, 80);
+            })
             return data;
         } catch (error: any) {
             throw new Error('item get error : ' + error);

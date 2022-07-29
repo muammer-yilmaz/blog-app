@@ -8,7 +8,6 @@ import Text from 'components/Text';
 import Register from 'components/Auth/Register'
 import {
   BrowserRouter,
-  HashRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -25,14 +24,14 @@ function App() {
     <ChakraProvider >
       <div className="App">
         <Navbar />
-        <HashRouter >
-          <Routes>
+        <BrowserRouter >
+          <Routes >
             <Route path='/' element={<HomePage />} />
             {/* <Route path='/login' element={<Login />} /> */}
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
         <Footer />
       </div>
     </ChakraProvider>

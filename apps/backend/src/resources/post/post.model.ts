@@ -21,4 +21,8 @@ const PostModel = new Schema({
     },
 }, { timestamps: true });
 
+PostModel.virtual('truncated_text').get(function () {
+    return this.body.substring(0, 150);
+});
+
 export default model<Post>('Post', PostModel);
