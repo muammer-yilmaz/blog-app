@@ -1,4 +1,5 @@
 import PostList from "components/Post/PostList";
+import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
 import { getPosts } from "services/api";
 import { Post } from "types/types";
@@ -27,6 +28,7 @@ const HomePage: React.FC = () => {
     return (
         <>
             <PostList {...{ items }} />
+            {/* <Loader /> */}
         </>
     )
 }

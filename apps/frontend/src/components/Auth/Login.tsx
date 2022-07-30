@@ -13,6 +13,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 import React from 'react';
+import { Link as ReactLink } from 'react-router-dom'
 
 const Login: React.FC = () => {
 
@@ -24,7 +25,7 @@ const Login: React.FC = () => {
             bg={useColorModeValue('gray.50', 'gray.800')}>
             <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
                 <Stack align={'center'}>
-                    <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+                    <Heading fontSize={'4xl'}>Login to your account</Heading>
                     <Text fontSize={'lg'} color={'gray.600'}>
                         to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
                     </Text>
@@ -59,6 +60,11 @@ const Login: React.FC = () => {
                                 }}>
                                 Sign in
                             </Button>
+                        </Stack>
+                        <Stack pt={6}>
+                            <Text align={'center'}>
+                                Don't have an account? <Link as={ReactLink} to="/register" color={'blue.400'} >Register</Link>
+                            </Text>
                         </Stack>
                     </Stack>
                 </Box>

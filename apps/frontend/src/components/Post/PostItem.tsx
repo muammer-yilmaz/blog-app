@@ -20,21 +20,21 @@ const PostItem: React.FC<Post> = (props) => {
 
     return (
         <>
-            <Center py={3}>
+            <Center py={6} px={3} >
                 <Box
-                    maxW={'445px'}
-                    minW={'210px'}
-                    w={'full'}
+                    w={'360px'}
+                    h={'420px'}
                     bg={useColorModeValue('white', 'gray.900')}
                     boxShadow={'2xl'}
                     rounded={'md'}
                     p={6}
                     overflow={'hidden'}>
                     <Box
-                        h={'210px'}
+                        h={'180px'}
                         bg={'gray.100'}
                         pos={'relative'}
                         display={'flex'}
+
                     >
                         <Image
                             src={props.image === undefined ? fallbackImage : props.image}
@@ -45,7 +45,7 @@ const PostItem: React.FC<Post> = (props) => {
 
 
                     </Box>
-                    <Stack>
+                    <Stack >
                         <Text
                             color={'green.500'}
                             textTransform={'uppercase'}

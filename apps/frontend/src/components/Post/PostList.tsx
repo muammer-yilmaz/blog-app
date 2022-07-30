@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Center, Stack } from "@chakra-ui/react";
 import React from "react";
 import { Post } from "types/types";
 import PostItem from "./PostItem";
@@ -14,7 +14,8 @@ const PostList: React.FC<IProps> = ({ items }) => {
         <>
 
             <Box >
-                <Stack spacing={5} direction={"row"} flexWrap="wrap" justify={"center"}>
+                {/* <Stack border={'2px green solid'} spacing={5} direction={"row"} justify={"center"}> */}
+                <Center flexWrap="wrap">
                     {
 
                         items.map(el => {
@@ -23,7 +24,8 @@ const PostList: React.FC<IProps> = ({ items }) => {
                             )
                         })
                     }
-                </Stack>
+                </Center>
+                {/* </Stack> */}
             </Box>
         </>
     )

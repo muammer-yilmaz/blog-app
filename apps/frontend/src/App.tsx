@@ -23,16 +23,16 @@ function App() {
   return (
     <ChakraProvider >
       <div className="App">
-        <Navbar />
         <BrowserRouter >
+          <Navbar />
           <Routes >
             <Route path='/' element={<HomePage />} />
             {/* <Route path='/login' element={<Login />} /> */}
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
-        <Footer />
       </div>
     </ChakraProvider>
   );

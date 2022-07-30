@@ -18,3 +18,13 @@ export interface IToken {
     token: string
 }
 
+export interface IAction {
+    type: string,
+    payload: any
+}
+
+export interface IPostReducer {
+    posts: Post[],
+    isLoading: boolean
+}
+
