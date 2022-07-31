@@ -1,4 +1,4 @@
-import { IToken, Post } from 'types/types';
+import { IToken, Post, PostRequestRoot } from 'types/types';
 import httpRequest from './fetcher';
 
 // Auth
@@ -23,13 +23,13 @@ export const login = async (mail: string, password: string) => {
 // Post 
 
 export const getPosts = async () => {
-    const data = await httpRequest<Post[]>(
+    const { post } = await httpRequest<PostRequestRoot>(
         {
             method: 'GET',
             url: '/posts',
         }
     )
-    return data
+    return post
 }
 
 export const getSinglePost = async (id: string) => {

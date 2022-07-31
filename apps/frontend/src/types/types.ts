@@ -14,8 +14,12 @@ export interface Post extends IPost {
     __v: number;
 }
 
+export interface PostRequestRoot {
+    post: Post[]
+}
+
 export interface IToken {
-    token: string
+    token: string | null
 }
 
 export interface IAction {
@@ -23,8 +27,20 @@ export interface IAction {
     payload: any
 }
 
-export interface IPostReducer {
+export interface IStatus {
+    status: 'idle' | 'loading' | 'failed';
+}
+export interface IPostReducer extends IStatus {
     posts: Post[],
-    isLoading: boolean
+
+}
+
+export interface IAuthReducer extends IStatus, IToken {
+
+}
+
+export interface ILoginParams {
+    mail: string,
+    password: string
 }
 
