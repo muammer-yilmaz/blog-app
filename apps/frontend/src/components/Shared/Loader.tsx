@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
-const loader = require('../../assets/Loader.gif')
+const loader = require('../../assets/loader.gif')
 
 const Loader: React.FC = () => {
 
