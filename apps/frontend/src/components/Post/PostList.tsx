@@ -1,5 +1,7 @@
 import { Box, Center, Stack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "redux/hooks";
+import { selectPosts } from "redux/reducers/postReducer";
 import { Post } from "types/types";
 import PostItem from "./PostItem";
 
@@ -8,8 +10,16 @@ interface IProps {
 }
 
 const PostList: React.FC<IProps> = ({ items }) => {
-    console.log(items)
 
+    const [posts, setPosts] = useState<Post[]>([]);
+
+    const selector = useAppSelector(selectPosts)
+
+    useEffect(() => {
+        setPosts(selector.posts)
+    }, [])
+
+    console.log('items :>> ', items);
     return (
         <>
 
@@ -18,7 +28,7 @@ const PostList: React.FC<IProps> = ({ items }) => {
                 <Center flexWrap="wrap">
                     {
 
-                        items.map(el => {
+                        posts.map(el => {
                             return (
                                 <PostItem  {...el} key={el._id} />
                             )

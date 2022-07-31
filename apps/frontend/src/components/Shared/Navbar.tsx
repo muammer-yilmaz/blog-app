@@ -25,6 +25,8 @@ import { RiNewspaperLine } from 'react-icons/ri';
 import { MdLogout, MdOutlineSettings } from 'react-icons/md';
 import { Link as ReactLink } from 'react-router-dom';
 import LoginButton from './LoginButton';
+import { useAppSelector } from 'redux/hooks';
+import { selectAuth } from 'redux/reducers/authReducer';
 
 
 const Links = ['Posts'];
@@ -43,13 +45,14 @@ const Links = ['Posts'];
 //     </Link>
 // );
 
-const isTrue = true;
 
 const Navbar: React.FC = () => {
 
     const { colorMode, toggleColorMode } = useColorMode();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const selector = useAppSelector(selectAuth);
 
     return (
         <>
@@ -96,7 +99,7 @@ const Navbar: React.FC = () => {
                             </Button>
 
                             <Menu>
-                                {isTrue ? (
+                                {selector.token !== null ? (
                                     <MenuButton
                                         as={Button}
                                         rounded={'full'}

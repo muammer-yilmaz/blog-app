@@ -10,7 +10,7 @@ const initialState: IAuthReducer = {
     status: "idle"
 }
 
-const loginThunk = createAsyncThunk(
+export const loginThunk = createAsyncThunk(
     LOGIN_SUCCESS,
     async (payload: ILoginParams) => {
         const response = await login(payload.mail, payload.password);

@@ -1,6 +1,8 @@
 import PostList from "components/Post/PostList";
 import Loader from "components/Shared/Loader";
 import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchPostsThunk, selectPosts } from "redux/reducers/postReducer";
 import { getPosts } from "services/api";
 import { Post } from "types/types";
 
@@ -9,26 +11,23 @@ import { Post } from "types/types";
 const HomePage: React.FC = () => {
 
     const [items, setItems] = useState<Post[]>([]);
+    const dispatch = useAppDispatch();
+    const selector = useAppSelector(selectPosts);
+
 
     useEffect(() => {
-
-        const fetchData = async () => {
-            const data: any = await getPosts();
-            setItems(data.post)
-
-        }
-        fetchData()
-
+        dispatch(fetchPostsThunk())
+        setItems(selector.posts)
 
     }, [])
-
-    console.log("items", items);
 
 
     return (
         <>
-            <PostList {...{ items }} />
-            {/* <Loader /> */}
+            {selector.status === 'loading' ? <Loader />
+                : <PostList {...{ items }} />
+
+            }
         </>
     )
 }

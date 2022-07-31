@@ -11,11 +11,31 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    FormErrorMessage,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom'
+import { ILoginParams } from 'types/types';
+import { useForm, Controller } from 'react-hook-form';
+import { useAppDispatch } from 'redux/hooks';
+import { loginThunk } from 'redux/reducers/authReducer';
+
 
 const Login: React.FC = () => {
+
+    const [input, setInput] = useState<ILoginParams>();
+
+    const dispatch = useAppDispatch();
+
+    const { register, control, handleSubmit, formState: { errors } } = useForm<ILoginParams>();
+
+    const onSubmit = (data: ILoginParams) => {
+        try {
+            dispatch(loginThunk(data))
+        } catch (error: any) {
+            console.log('error :>> ', error);
+        }
+    }
 
     return (
         <Flex
@@ -36,14 +56,26 @@ const Login: React.FC = () => {
                     boxShadow={'lg'}
                     p={8}>
                     <Stack spacing={4}>
-                        <FormControl id="email">
-                            <FormLabel>Email address</FormLabel>
-                            <Input type="email" />
-                        </FormControl>
-                        <FormControl id="password">
-                            <FormLabel>Password</FormLabel>
-                            <Input type="password" />
-                        </FormControl>
+                        <form onSubmit={handleSubmit(onSubmit)} >
+                            <FormControl id="email" >
+                                <FormLabel>Email address</FormLabel>
+                                <Input type="email"
+                                    {...register('mail', {
+                                        required: 'This is required',
+
+                                    })} />
+                                <FormErrorMessage>
+                                    {errors.mail && errors.mail.message}
+                                </FormErrorMessage>
+                            </FormControl>
+                            <FormControl id="password">
+                                <FormLabel>Password</FormLabel>
+                                <Input type="password" {...register('mail', {
+                                    required: 'This is required',
+                                    minLength: { value: 6, message: 'Minimum length should be' },
+                                })} />
+                            </FormControl>
+                        </form>
                         <Stack spacing={10}>
                             <Stack
                                 direction={{ base: 'column', sm: 'row' }}
@@ -68,8 +100,8 @@ const Login: React.FC = () => {
                         </Stack>
                     </Stack>
                 </Box>
-            </Stack>
-        </Flex>
+            </Stack >
+        </Flex >
     );
 }
 

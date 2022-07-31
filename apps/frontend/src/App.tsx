@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
-import { loginStart } from './redux/actions/authActions';
 import Navbar from 'components/Shared/Navbar';
-import Text from 'components/Text';
 import Register from 'components/Auth/Register'
 import {
   BrowserRouter,
@@ -16,9 +12,6 @@ import Login from 'components/Auth/Login';
 import HomePage from 'pages/HomePage';
 
 function App() {
-
-  //const [items, setItems] = useState<Post[]>([]);
-  //const dispatch = useDispatch();
 
   return (
     <ChakraProvider >
