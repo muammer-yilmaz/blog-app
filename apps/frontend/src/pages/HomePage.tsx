@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
 
     return (
         <>
-            {selector.status === 'loading' ? <Loader />
+            {selector.status === 'loading' ? <Loader {...{ width: 100 }} />
                 : <PostList {...{ items }} />
 
             }

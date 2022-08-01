@@ -32,6 +32,7 @@ const authReducer = createSlice({
         ).addCase(loginThunk.fulfilled, (state, action) => {
             state.status = 'idle';
             state.token = action.payload.token;
+            localStorage.setItem("token", "" + action.payload.token)
         }
         ).addCase(loginThunk.rejected, (state) => {
             state.status = 'failed'

@@ -27,6 +27,10 @@ export interface IAction {
     payload: any
 }
 
+export interface IResponseError {
+    message?: string
+}
+
 export interface IStatus {
     status: 'idle' | 'loading' | 'failed';
 }
@@ -35,7 +39,7 @@ export interface IPostReducer extends IStatus {
 
 }
 
-export interface IAuthReducer extends IStatus, IToken {
+export interface IAuthReducer extends IStatus, IToken, IResponseError {
 
 }
 

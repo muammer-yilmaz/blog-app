@@ -3,13 +3,18 @@ import React from 'react';
 
 const loader = require('../../assets/loader.gif')
 
-const Loader: React.FC = () => {
+interface IProps {
+    // height: string | number | undefined,
+    width: string | number | undefined
+}
+
+const Loader: React.FC<IProps> = (props) => {
 
     return (
         <>
-            <Box minH={'90vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <Box display={'flex'} alignItems={'center'} justifyContent={'center'} >
                 <figure>
-                    <img width={200} src={loader} alt='loader' />
+                    <img width={props.width} src={loader} alt='loader' />
                 </figure>
             </Box>
         </>

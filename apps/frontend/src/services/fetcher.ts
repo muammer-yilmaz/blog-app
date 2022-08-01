@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { Axios, AxiosRequestConfig } from "axios";
+import toast from "react-hot-toast";
 
 const URL = process.env.BACKEND_URL || "http://localhost:5000"
 
@@ -12,8 +13,18 @@ const httpRequest = <T>(req: AxiosRequestConfig): Promise<T> => {
             const request = await axios(req);
 
             resolve(request.data)
-        } catch (e) {
-            reject(e || {});
+        } catch (e: any) {
+            if (axios.isAxiosError(e)) {
+                const data: any = e.response?.data;
+                console.log('data :>> ', data);
+                toast.error(data.message)
+                reject({
+                    message: e.response?.data
+                })
+            }
+            else {
+                reject(e || {});
+            }
         }
     });
 }

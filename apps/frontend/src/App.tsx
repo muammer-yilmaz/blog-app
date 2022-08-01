@@ -10,11 +10,13 @@ import {
 import Footer from 'components/Shared/Footer';
 import Login from 'components/Auth/Login';
 import HomePage from 'pages/HomePage';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
   return (
     <ChakraProvider >
+      <Toaster />
       <div className="App">
         <BrowserRouter >
           <Navbar />

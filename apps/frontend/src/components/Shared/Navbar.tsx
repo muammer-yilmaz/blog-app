@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
                     <Box pb={4} display={{ md: 'none' }}>
                         <Stack as={'nav'} spacing={4}>
                             {Links.map((link) => (
-                                <h4> {link}</h4>
+                                <h4 key={link}> {link}</h4>
                             ))}
                         </Stack>
                     </Box>
