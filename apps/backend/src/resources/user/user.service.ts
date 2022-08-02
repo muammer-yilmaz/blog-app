@@ -17,8 +17,8 @@ class UserService {
             const data = await this.user.create({ ...user, createdDate: date.toISOString() })
             if (data instanceof UserModel)
                 return "Account created";
-        } catch (error) {
-            throw new Error('user create error ' + error);
+        } catch (error: any) {
+            throw new Error(error);
         }
     }
 
@@ -38,8 +38,8 @@ class UserService {
                 throw new Error('Wrong credentials given');
             }
 
-        } catch (error) {
-            throw new Error('Unable to login ' + error);
+        } catch (error: any) {
+            throw new Error(error);
         }
 
     }
@@ -49,8 +49,8 @@ class UserService {
             const data = await this.user.find({});
 
             return data;
-        } catch (error) {
-            throw new Error(' user get error ' + error);
+        } catch (error: any) {
+            throw new Error(error);
         }
     }
 
