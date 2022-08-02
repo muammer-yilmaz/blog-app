@@ -1,4 +1,4 @@
-import { IToken, Post, PostRequestRoot } from 'types/types';
+import { IResgisterParams, IToken, Post, PostRequestRoot, User } from 'types/types';
 import httpRequest from './fetcher';
 
 // Auth
@@ -17,7 +17,16 @@ export const login = async (mail: string, password: string) => {
             data: { mail, password }
         }
     )
+}
 
+export const register = async (user: IResgisterParams) => {
+    return httpRequest<User>(
+        {
+            method: 'POST',
+            url: '/users/register',
+            data: user
+        }
+    )
 }
 
 // Post 

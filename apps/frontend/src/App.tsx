@@ -11,6 +11,7 @@ import Footer from 'components/Shared/Footer';
 import Login from 'components/Auth/Login';
 import HomePage from 'pages/HomePage';
 import { Toaster } from 'react-hot-toast';
+import PostsPage from 'pages/PostsPage';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
           <Navbar />
           <Routes >
             <Route path='/' element={<HomePage />} />
-            {/* <Route path='/login' element={<Login />} /> */}
+            <Route path='/posts' element={<PostsPage />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
           </Routes>

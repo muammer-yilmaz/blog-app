@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FETCH_POSTS_SUCCESS } from "constants/actionTypes";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Post_Fetch_All } from "constants/actionTypes";
 import { getPosts } from "services/api";
 import { IPostReducer } from "types/types";
 import { RootState } from "redux/store";
@@ -10,7 +10,7 @@ const initialState: IPostReducer = {
 }
 
 export const fetchPostsThunk = createAsyncThunk(
-    FETCH_POSTS_SUCCESS,
+    Post_Fetch_All,
     async () => {
         const response = await getPosts();
         return response;

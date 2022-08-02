@@ -4,7 +4,6 @@ import IUser from 'Types/User/User'
 
 export interface User extends IUser {
     _id: string
-
 }
 
 export interface Post extends IPost {
@@ -48,3 +47,9 @@ export interface ILoginParams {
     password: string
 }
 
+export interface IResgisterParams {
+    name: string,
+    surname: string,
+    mail: string,
+    password: string
+}
