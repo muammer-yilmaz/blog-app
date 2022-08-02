@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
     Box,
     Flex,
@@ -23,27 +22,12 @@ import { HamburgerIcon, CloseIcon, AddIcon, MoonIcon, SunIcon } from '@chakra-ui
 import { AiOutlineUser } from 'react-icons/ai';
 import { RiNewspaperLine } from 'react-icons/ri';
 import { MdLogout, MdOutlineSettings } from 'react-icons/md';
-import { Link as ReactLink } from 'react-router-dom';
 import LoginButton from './LoginButton';
-import { useAppSelector } from 'redux/hooks';
-import { selectAuth } from 'redux/reducers/authReducer';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { logout, selectAuth } from 'redux/reducers/authReducer';
+import { Link as RouterLink } from 'react-router-dom';
 
-
-const Links = ['Posts'];
-
-// const NavLink = ({ children }: { children: ReactNode }) => (
-//     <Link
-//         px={2}
-//         py={1}
-//         rounded={'md'}
-//         _hover={{
-//             textDecoration: 'none',
-//             bg: useColorModeValue('gray.200', 'gray.700'),
-//         }}
-//         href={'#'}>
-//         {children}
-//     </Link>
-// );
+const Links = ['Home', 'Posts'];
 
 
 const Navbar: React.FC = () => {
@@ -53,6 +37,11 @@ const Navbar: React.FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const selector = useAppSelector(selectAuth);
+    const dispatch = useAppDispatch();
+
+    const logOut = () => {
+        dispatch(logout())
+    }
 
     return (
         <>
@@ -68,19 +57,17 @@ const Navbar: React.FC = () => {
                     <HStack spacing={8} alignItems={'center'} >
                         <Hide below='md'>
                             <Box display={'flex'} alignItems={'center'} >
-                                <Link as={ReactLink} to='/'>
+                                <Link as={RouterLink} to='/'>
                                     <Icon as={RiNewspaperLine} w={6} h={6} />
                                 </Link>
                             </Box>
                         </Hide>
                         <HStack
-                            as={'a'}
-                            href={'#'}
                             spacing={4}
                             display={{ base: 'none', md: 'flex' }}>
-                            {Links.map((link) => (
-                                <h3>{link}</h3>
-                            ))}
+                            {
+                                NavLinks()
+                            }
                         </HStack>
                     </HStack>
 
@@ -107,19 +94,19 @@ const Navbar: React.FC = () => {
                                         cursor={'pointer'}
                                         minW={0}>
                                         <Avatar
-                                            size={'sm'}
+                                            size={'md'}
                                             src={
                                                 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                                             }
                                         />
                                     </MenuButton>
-                                ) : <Link as={ReactLink} to='/login'> <LoginButton /> </Link>
+                                ) : <Link as={RouterLink} to='/login'> <LoginButton /> </Link>
                                 }
                                 <MenuList>
                                     <MenuItem icon={<Icon as={AiOutlineUser} />} display={'flex'} alignItems={'end'} >Profile</MenuItem>
                                     <MenuItem icon={<Icon as={MdOutlineSettings} />} display={'flex'} alignItems={'end'} > Settings</MenuItem>
                                     <MenuDivider />
-                                    <MenuItem icon={<Icon as={MdLogout} />} display={'flex'} alignItems={'end'}>Logout</MenuItem>
+                                    <MenuItem icon={<Icon as={MdLogout} />} display={'flex'} alignItems={'end'} onClick={logOut}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
                         </Stack>
@@ -129,9 +116,9 @@ const Navbar: React.FC = () => {
                 {isOpen ? (
                     <Box pb={4} display={{ md: 'none' }}>
                         <Stack as={'nav'} spacing={4}>
-                            {Links.map((link) => (
-                                <h4 key={link}> {link}</h4>
-                            ))}
+                            {
+                                NavLinks()
+                            }
                         </Stack>
                     </Box>
                 ) : null}
@@ -140,7 +127,30 @@ const Navbar: React.FC = () => {
             <Box p={4}></Box>
         </>
     );
-
 }
+
+
+const NavLinks = () => {
+    return (
+        <>
+            {
+                Links.map((link) => {
+                    let to = link.toLowerCase();
+                    return (
+                        <Link px={2}
+                            py={1}
+                            rounded={'md'}
+                            key={link}
+                            _hover={{
+                                textDecoration: 'none',
+                                bg: 'gray.500'
+                            }} as={RouterLink} to={`/${link !== 'Home' ? to : ''}`}> {link} </Link>
+                    )
+                })
+            }
+        </>
+    )
+}
+
 
 export default Navbar;

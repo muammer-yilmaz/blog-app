@@ -12,11 +12,14 @@ import {
     Text,
     useColorModeValue,
     FormErrorMessage,
+    Alert,
+    AlertIcon,
+    AlertDescription,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link as ReactLink } from 'react-router-dom'
 import { ILoginParams } from 'types/types';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { loginThunk, selectAuth } from 'redux/reducers/authReducer';
 import Loader from 'components/Shared/Loader';
@@ -24,12 +27,10 @@ import Loader from 'components/Shared/Loader';
 
 const Login: React.FC = () => {
 
-    const [input, setInput] = useState<ILoginParams>();
-
     const dispatch = useAppDispatch();
     const selector = useAppSelector(selectAuth)
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm<ILoginParams>();
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>();
 
     const onSubmit = (data: ILoginParams) => {
         try {
@@ -90,6 +91,17 @@ const Login: React.FC = () => {
                                     <Checkbox>Remember me</Checkbox>
                                     <Link color={'blue.400'}>Forgot password?</Link>
                                 </Stack>
+                                {/* <Typ>
+                                    
+                                </Typ> */}
+                                {selector.status === 'failed' ? <Alert status='error'>
+                                    <AlertIcon />
+                                    {/* <AlertTitle>Your browser is outdated!</AlertTitle> */}
+                                    <AlertDescription>
+                                        {selector.message}
+                                    </AlertDescription>
+                                </Alert> : ""}
+
                                 <Button
                                     bg={'blue.400'}
                                     color={'white'}
