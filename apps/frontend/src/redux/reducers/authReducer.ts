@@ -1,7 +1,7 @@
 import { IAuthReducer, ILoginParams, IResgisterParams } from "types/types";
 import { Auth_Login, Auth_Register } from "constants/actionTypes";
 import { login, register } from "services/api";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "redux/store";
 import toast from "react-hot-toast";
 
@@ -50,8 +50,9 @@ const authReducer = createSlice({
             state.status = 'loading';
         }
         ).addCase(loginThunk.fulfilled, (state, action) => {
-            state.status = 'idle';
+            state.status = 'success';
             state.token = action.payload.token;
+            toast.success('Login Successfull');
             localStorage.setItem("token", "" + action.payload.token);
         }
         ).addCase(loginThunk.rejected, (state, action) => {
@@ -63,8 +64,8 @@ const authReducer = createSlice({
             state.status = 'loading';
         }
         ).addCase(registerThunk.fulfilled, (state) => {
-            state.status = 'idle';
-            toast.success('User succesfully created');
+            state.status = 'success';
+            toast.success('User successfully created');
         }
         ).addCase(registerThunk.rejected, (state, action) => {
             state.status = 'failed';

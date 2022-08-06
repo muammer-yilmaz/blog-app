@@ -29,7 +29,7 @@ const postReducer = createSlice({
             state.status = 'loading'
         }
         ).addCase(fetchPostsThunk.fulfilled, (state, action) => {
-            state.status = 'idle';
+            state.status = 'success';
             state.posts = action.payload
         }
         ).addCase(fetchPostsThunk.rejected, (state) => {

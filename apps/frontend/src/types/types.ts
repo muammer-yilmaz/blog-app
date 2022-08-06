@@ -31,7 +31,7 @@ export interface IResponseError {
 }
 
 export interface IStatus {
-    status: 'idle' | 'loading' | 'failed';
+    status: 'idle' | 'loading' | 'failed' | 'success';
 }
 export interface IPostReducer extends IStatus {
     posts: Post[],

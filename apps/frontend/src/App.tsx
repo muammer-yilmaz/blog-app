@@ -12,6 +12,8 @@ import Login from 'components/Auth/Login';
 import HomePage from 'pages/HomePage';
 import { Toaster } from 'react-hot-toast';
 import PostsPage from 'pages/PostsPage';
+import ProtectedRoute from 'utils/ProtectedRoute';
+import PostDetailPage from 'pages/PostDetailPage';
 
 function App() {
 
@@ -23,9 +25,26 @@ function App() {
           <Navbar />
           <Routes >
             <Route path='/' element={<HomePage />} />
-            <Route path='/posts' element={<PostsPage />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={
+              <ProtectedRoute {...{ redirect: '/', isAuth: true }}>
+                <Register />
+              </ProtectedRoute>}
+            />
+            <Route path='/login' element={
+              <ProtectedRoute {...{ redirect: '/', isAuth: true }}>
+                <Login />
+              </ProtectedRoute>}
+            />
+            <Route path='/posts' element={
+              <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
+                <PostsPage />
+              </ProtectedRoute>}
+            />
+            <Route path='/post-detail' element={
+              <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
+                <PostDetailPage />
+              </ProtectedRoute>}
+            />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -16,8 +16,8 @@ import {
     AlertIcon,
     AlertDescription,
 } from '@chakra-ui/react';
-import React from 'react';
-import { Link as ReactLink } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { ILoginParams } from 'types/types';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -29,6 +29,7 @@ const Login: React.FC = () => {
 
     const dispatch = useAppDispatch();
     const selector = useAppSelector(selectAuth)
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>();
 
@@ -39,6 +40,11 @@ const Login: React.FC = () => {
             console.log('error :>> ', error);
         }
     }
+
+    useEffect(() => {
+        if (selector.status === 'success')
+            navigate('/');
+    }, [selector.status, navigate])
 
     return (
         <Flex
@@ -91,12 +97,8 @@ const Login: React.FC = () => {
                                     <Checkbox>Remember me</Checkbox>
                                     <Link color={'blue.400'}>Forgot password?</Link>
                                 </Stack>
-                                {/* <Typ>
-                                    
-                                </Typ> */}
                                 {selector.status === 'failed' ? <Alert status='error'>
                                     <AlertIcon />
-                                    {/* <AlertTitle>Your browser is outdated!</AlertTitle> */}
                                     <AlertDescription>
                                         {selector.message}
                                     </AlertDescription>
