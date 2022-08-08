@@ -2,7 +2,7 @@ import { Box, Center, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "redux/hooks";
 import { selectPosts } from "redux/reducers/postReducer";
-import { Post } from "types/types";
+import { Post } from "types";
 import PostItem from "./PostItem";
 
 interface IProps {

@@ -5,22 +5,22 @@ import { selectAuth } from "redux/reducers/authReducer";
 interface IProps {
     redirect: string,
     children: JSX.Element,
-    isAuth?: boolean
+    isAuth: boolean
 }
 
 const ProtectedRoute: React.FC<IProps> = ({ redirect, children, isAuth }) => {
     const selector = useAppSelector(selectAuth)
 
-    if (isAuth && selector.token !== null) {
+    if (selector.token === null && !isAuth) {
+        console.log('token :>> ', selector.token);
         return <Navigate to={redirect} replace />
     }
-
-    if (!isAuth && selector.token === null) {
+    else if (selector.token !== null && isAuth) {
+        console.log('isAuth', isAuth)
         return <Navigate to={redirect} replace />
     }
 
     return children
-
 
 }
 

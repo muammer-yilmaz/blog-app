@@ -14,6 +14,7 @@ import { Toaster } from 'react-hot-toast';
 import PostsPage from 'pages/PostsPage';
 import ProtectedRoute from 'utils/ProtectedRoute';
 import PostDetailPage from 'pages/PostDetailPage';
+import AddPostPage from 'pages/AddPostPage';
 
 function App() {
 
@@ -33,7 +34,8 @@ function App() {
             <Route path='/login' element={
               <ProtectedRoute {...{ redirect: '/', isAuth: true }}>
                 <Login />
-              </ProtectedRoute>}
+              </ProtectedRoute>
+            }
             />
             <Route path='/posts' element={
               <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
@@ -45,6 +47,7 @@ function App() {
                 <PostDetailPage />
               </ProtectedRoute>}
             />
+            <Route path='/add' element={<AddPostPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

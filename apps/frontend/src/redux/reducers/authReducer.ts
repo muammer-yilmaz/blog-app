@@ -1,4 +1,4 @@
-import { IAuthReducer, ILoginParams, IResgisterParams } from "types/types";
+import { IAuthReducer, ILoginParams, IResgisterParams } from "types";
 import { Auth_Login, Auth_Register } from "constants/actionTypes";
 import { login, register } from "services/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";

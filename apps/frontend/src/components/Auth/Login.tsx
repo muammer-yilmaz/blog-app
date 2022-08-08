@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
-import { ILoginParams } from 'types/types';
+import { ILoginParams } from 'types';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { loginThunk, selectAuth } from 'redux/reducers/authReducer';
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
                     <Stack spacing={4}>
                         <form onSubmit={handleSubmit(onSubmit)} >
                             <Stack mb={3}>
-                                <FormControl id="email" isInvalid={errors.mail !== undefined} >
+                                <FormControl id="email" isInvalid={!!errors.mail} >
                                     <FormLabel>Email address</FormLabel>
                                     <Input type="email"
                                         {...register('mail', {
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                                         {errors.mail && errors.mail.message}
                                     </FormErrorMessage>
                                 </FormControl>
-                                <FormControl id="password" isInvalid={errors.password !== undefined}>
+                                <FormControl id="password" isInvalid={!!errors.password}>
                                     <FormLabel>Password</FormLabel>
                                     <Input type="password" {...register('password', {
                                         required: 'This is required',

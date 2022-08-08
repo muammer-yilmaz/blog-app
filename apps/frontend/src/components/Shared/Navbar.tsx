@@ -73,14 +73,16 @@ const Navbar: React.FC = () => {
 
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={4} alignItems={'center'}>
-                            <Button
-                                variant={'solid'}
-                                colorScheme={'teal'}
-                                size={'md'}
-                                mr={1}
-                                leftIcon={<AddIcon />}>
-                                New Post
-                            </Button>
+                            <Link as={RouterLink} to='/add'>
+                                <Button
+                                    variant={'solid'}
+                                    colorScheme={'teal'}
+                                    size={'md'}
+                                    mr={1}
+                                    leftIcon={<AddIcon />}>
+                                    New Post
+                                </Button>
+                            </Link>
                             <Button onClick={toggleColorMode}>
                                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                             </Button>

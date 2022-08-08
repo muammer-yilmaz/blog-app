@@ -33,12 +33,16 @@ export interface IResponseError {
 export interface IStatus {
     status: 'idle' | 'loading' | 'failed' | 'success';
 }
-export interface IPostReducer extends IStatus {
-    posts: Post[],
+
+export interface IReducer extends IStatus, IResponseError {
 
 }
 
-export interface IAuthReducer extends IStatus, IToken, IResponseError {
+export interface IPostReducer extends IReducer {
+    posts: Post[],
+}
+
+export interface IAuthReducer extends IToken, IReducer {
 
 }
 
@@ -52,4 +56,8 @@ export interface IResgisterParams {
     surname: string,
     mail: string,
     password: string
+}
+
+export interface IPostParams extends IPost {
+
 }

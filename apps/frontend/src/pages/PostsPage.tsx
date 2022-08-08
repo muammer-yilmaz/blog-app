@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Post } from 'types/types';
+import { Post } from 'types';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { fetchPostsThunk, selectPosts } from 'redux/reducers/postReducer';
 import PostList from 'components/Post/PostList';

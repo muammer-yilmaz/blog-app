@@ -13,13 +13,14 @@ import {
     Text,
     useColorModeValue,
     Link,
+    FormErrorMessage,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as ReactLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { registerThunk, selectAuth } from 'redux/reducers/authReducer';
-import { IResgisterParams } from 'types/types';
+import { IResgisterParams } from 'types';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import Loader from 'components/Shared/Loader';
 
@@ -62,29 +63,38 @@ const Register: React.FC = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <HStack>
                                 <Box>
-                                    <FormControl id="firstName" isRequired>
+                                    <FormControl id="firstName" isInvalid={!!errors.name}>
                                         <FormLabel>First Name</FormLabel>
                                         <Input type="text" {...register('name', {
                                             required: 'This is required',
                                         })} />
+                                        <FormErrorMessage>
+                                            {errors.name && errors.name.message}
+                                        </FormErrorMessage>
                                     </FormControl>
                                 </Box>
                                 <Box>
-                                    <FormControl id="lastName" isRequired>
+                                    <FormControl id="lastName" isInvalid={!!errors.surname}>
                                         <FormLabel>Last Name</FormLabel>
                                         <Input type="text" {...register('surname', {
                                             required: 'This is required',
                                         })} />
+                                        <FormErrorMessage>
+                                            {errors.surname && errors.surname.message}
+                                        </FormErrorMessage>
                                     </FormControl>
                                 </Box>
                             </HStack>
-                            <FormControl id="email" isRequired>
+                            <FormControl id="email" isInvalid={!!errors.mail}>
                                 <FormLabel>Email address</FormLabel>
                                 <Input type="email" {...register('mail', {
                                     required: 'This is required',
                                 })} />
+                                <FormErrorMessage>
+                                    {errors.mail && errors.mail.message}
+                                </FormErrorMessage>
                             </FormControl>
-                            <FormControl id="password" isRequired>
+                            <FormControl id="password" isInvalid={!!errors.password}>
                                 <FormLabel>Password</FormLabel>
                                 <InputGroup>
                                     <Input type={showPassword ? 'text' : 'password'} {...register('password', {
@@ -101,6 +111,9 @@ const Register: React.FC = () => {
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
+                                <FormErrorMessage>
+                                    {errors.password && errors.password.message}
+                                </FormErrorMessage>
                             </FormControl>
                             <Stack spacing={10} pt={2}>
                                 <Button
