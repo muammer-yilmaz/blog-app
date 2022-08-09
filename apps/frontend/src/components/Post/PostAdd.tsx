@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { createPostThunk, selectPosts } from 'redux/reducers/postReducer';
 import { useNavigate } from 'react-router-dom';
 
-const AddPost: React.FC = () => {
+const PostAdd: React.FC = () => {
 
     const dispatch = useAppDispatch();
     const selector = useAppSelector(selectPosts)
@@ -32,8 +32,8 @@ const AddPost: React.FC = () => {
         <>
             <Container p={12} maxW={'container.md'}>
                 <Box p={8} boxShadow={'2xl'}>
-                    <Stack p={4} spacing={4}>
-                        <form onSubmit={handleSubmit(onSubmit)} >
+                    <form onSubmit={handleSubmit(onSubmit)} >
+                        <Stack p={4} spacing={4}>
                             <FormControl isRequired isInvalid={!!errors.title}>
                                 <FormLabel >
                                     Title
@@ -133,12 +133,12 @@ const AddPost: React.FC = () => {
                                     Save
                                 </Button>
                             </Flex>
-                        </form>
-                    </Stack>
+                        </Stack>
+                    </form>
                 </Box>
             </Container>
         </>
     )
 }
 
-export default AddPost;
+export default PostAdd;

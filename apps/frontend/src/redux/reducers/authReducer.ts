@@ -15,7 +15,7 @@ export const loginThunk = createAsyncThunk(
     Auth_Login,
     async (payload: ILoginParams, { rejectWithValue }) => {
         try {
-            const response = await login(payload.mail, payload.password);
+            const response = await login(payload);
             return response
         } catch (error: any) {
             return rejectWithValue(error)

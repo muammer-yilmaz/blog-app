@@ -1,13 +1,14 @@
 import IPost from 'Types/Post/Post'
 import IUser from 'Types/User/User'
 
-
-export interface User extends IUser {
+export interface Id {
     _id: string
 }
 
-export interface Post extends IPost {
-    _id: string
+export interface User extends IUser, Id {
+}
+
+export interface Post extends IPost, Id {
     createdAt: string;
     updatedAt: string;
     __v: number;
@@ -40,6 +41,8 @@ export interface IReducer extends IStatus, IResponseError {
 
 export interface IPostReducer extends IReducer {
     posts: Post[],
+    selectedId?: string,
+    singlePost?: Post
 }
 
 export interface IAuthReducer extends IToken, IReducer {
@@ -61,3 +64,4 @@ export interface IResgisterParams {
 export interface IPostParams extends IPost {
 
 }
+

@@ -35,7 +35,7 @@ class PostService {
         try {
             const data = await this.post.find({});
             data.forEach((el) => {
-                el.body = el.body.slice(0, 80);
+                el.body = el.body.slice(0, 60);
             })
             return data;
         } catch (error: any) {

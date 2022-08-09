@@ -1,4 +1,4 @@
-import { IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, User } from 'types';
+import { Id, ILoginParams, IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, User } from 'types';
 import httpRequest from './fetcher';
 
 // Auth
@@ -9,12 +9,12 @@ import httpRequest from './fetcher';
  * @param password 
  * @returns token => string
  */
-export const login = async (mail: string, password: string) => {
+export const login = async (user: ILoginParams) => {
     return httpRequest<IToken>(
         {
             method: 'POST',
             url: '/users/login',
-            data: { mail, password }
+            data: user
         }
     )
 }
@@ -45,7 +45,10 @@ export const getSinglePost = async (id: string) => {
     return await httpRequest<Post>(
         {
             method: 'GET',
-            url: `/posts/${id}`
+            url: `/posts/${id}`,
+            // headers: {
+            //     "Authorization": `Bearer ${localStorage.getItem("token")}`
+            // },
         }
     )
 }

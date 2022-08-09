@@ -7,16 +7,21 @@ import {
     Stack,
     Avatar,
     useColorModeValue,
+    Link,
 } from '@chakra-ui/react';
 import React from 'react';
 import { Post } from 'types';
+import { Link as RouterLink } from 'react-router-dom';
 
-const fallbackImage = require("../../assets/no-image.png")
+import fallbackImage from "../../assets/no-image.png";
+import { useAppDispatch } from 'redux/hooks';
+import { setId } from 'redux/reducers/postReducer';
 
 
 
 const PostItem: React.FC<Post> = (props) => {
 
+    const dispatch = useAppDispatch
 
     return (
         <>
@@ -28,7 +33,8 @@ const PostItem: React.FC<Post> = (props) => {
                     boxShadow={'2xl'}
                     rounded={'md'}
                     p={6}
-                    overflow={'hidden'}>
+                    overflow={'hidden'}
+                >
                     <Box
                         h={'180px'}
                         bg={'gray.100'}
@@ -54,17 +60,21 @@ const PostItem: React.FC<Post> = (props) => {
                             letterSpacing={1.1}>
                             Blog
                         </Text>
-                        <Heading
-                            color={useColorModeValue('gray.700', 'white')}
-                            fontSize={'2xl'}
-                            fontFamily={'body'}>
-                            {props.title}
-                        </Heading>
-                        <Text color={'gray.500'}>
+                        <Link
+                            href={`posts/${props._id}`}
+                        >
+                            <Heading
+                                color={useColorModeValue('gray.700', 'white')}
+                                fontSize={'2xl'}
+                                fontFamily={'body'}>
+                                {props.title}
+                            </Heading>
+                        </Link>
+                        <Text color={'gray.500'} >
                             {props.body}
                         </Text>
                     </Stack>
-                    <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
+                    <Stack mt={6} direction={'row'} spacing={4} align={'center'}  >
                         <Avatar
                             src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
                         />
