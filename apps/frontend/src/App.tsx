@@ -15,6 +15,7 @@ import PostsPage from 'pages/PostsPage';
 import ProtectedRoute from 'utils/ProtectedRoute';
 import PostDetailPage from 'pages/PostDetailPage';
 import PostAddPage from 'pages/PostAddPage';
+import ProfilePage from 'pages/ProfilePage';
 
 function App() {
 
@@ -46,6 +47,11 @@ function App() {
             <Route path='posts/:id' element={
               <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
                 <PostDetailPage />
+              </ProtectedRoute>}
+            />
+            <Route path='/profile' element={
+              <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
+                <ProfilePage />
               </ProtectedRoute>}
             />
             <Route path='/add' element={<PostAddPage />} />

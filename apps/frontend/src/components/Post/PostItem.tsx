@@ -12,16 +12,9 @@ import {
 import React from 'react';
 import { Post } from 'types';
 import { Link as RouterLink } from 'react-router-dom';
-
 import fallbackImage from "../../assets/no-image.png";
-import { useAppDispatch } from 'redux/hooks';
-import { setId } from 'redux/reducers/postReducer';
-
-
 
 const PostItem: React.FC<Post> = (props) => {
-
-    const dispatch = useAppDispatch
 
     return (
         <>
@@ -48,8 +41,6 @@ const PostItem: React.FC<Post> = (props) => {
                             width={'100%'}
                             fallbackSrc={fallbackImage}
                         />
-
-
                     </Box>
                     <Stack >
                         <Text
@@ -60,9 +51,7 @@ const PostItem: React.FC<Post> = (props) => {
                             letterSpacing={1.1}>
                             Blog
                         </Text>
-                        <Link
-                            href={`posts/${props._id}`}
-                        >
+                        <Link as={RouterLink} to={{ pathname: `../${props._id}` }}>
                             <Heading
                                 color={useColorModeValue('gray.700', 'white')}
                                 fontSize={'2xl'}

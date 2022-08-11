@@ -12,7 +12,6 @@ import {
     MenuItem,
     MenuDivider,
     useDisclosure,
-    useColorModeValue,
     Stack,
     useColorMode,
     Icon,
@@ -105,9 +104,7 @@ const Navbar: React.FC = () => {
                                 ) : <Link as={RouterLink} to='/login'> <LoginButton /> </Link>
                                 }
                                 <MenuList>
-                                    <MenuItem icon={<Icon as={AiOutlineUser} />} display={'flex'} alignItems={'end'} >Profile</MenuItem>
-                                    <MenuItem icon={<Icon as={MdOutlineSettings} />} display={'flex'} alignItems={'end'} > Settings</MenuItem>
-                                    <MenuDivider />
+                                    <MenuItems />
                                     <MenuItem icon={<Icon as={MdLogout} />} display={'flex'} alignItems={'end'} onClick={logOut}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
@@ -150,6 +147,20 @@ const NavLinks = () => {
                     )
                 })
             }
+        </>
+    )
+}
+
+const MenuItems = () => {
+    return (
+        <>
+            <Link as={RouterLink} to={'/profile'}>
+                <MenuItem icon={<Icon as={AiOutlineUser} />} display={'flex'} alignItems={'end'} >Profile</MenuItem>
+            </Link>
+            <Link as={RouterLink} to={'/settings'}>
+                <MenuItem icon={<Icon as={MdOutlineSettings} />} display={'flex'} alignItems={'end'} > Settings</MenuItem>
+            </Link>
+            <MenuDivider />
         </>
     )
 }

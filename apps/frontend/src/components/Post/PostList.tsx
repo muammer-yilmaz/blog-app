@@ -1,4 +1,4 @@
-import { Box, Center, Stack } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "redux/hooks";
 import { selectPosts } from "redux/reducers/postReducer";

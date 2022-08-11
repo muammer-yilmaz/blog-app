@@ -27,7 +27,7 @@ export const fetchSinglePostThunk = createAsyncThunk(
     async (payload: string, { rejectWithValue }) => {
         try {
             const response = await getSinglePost(payload);
-            return response;
+            return response.post;
         } catch (error) {
             return rejectWithValue(error);
         }
@@ -47,13 +47,16 @@ export const createPostThunk = createAsyncThunk(
         }
     }
 )
+type actionType = {
+    id: string
+}
 
 const postReducer = createSlice({
     name: "post",
     initialState,
     reducers: {
-        setId: (state: IPostReducer, action: { payload: string | undefined; }) => {
-            state.selectedId = action.payload
+        setId: (state: IPostReducer, action: PayloadAction<actionType>) => {
+            state.selectedId = action.payload.id
         }
 
     },
@@ -99,6 +102,6 @@ const postReducer = createSlice({
 
 export const selectPosts = (state: RootState) => state.posts
 
-export const { setId } = postReducer.actions;
+//export const { setId } = postReducer.actions;
 
 export default postReducer.reducer;

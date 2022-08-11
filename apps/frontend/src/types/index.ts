@@ -18,6 +18,10 @@ export interface PostRequestRoot {
     post: Post[]
 }
 
+export interface SinglePostRequestRoot {
+    post: Post;
+}
+
 export interface IToken {
     token: string | null
 }

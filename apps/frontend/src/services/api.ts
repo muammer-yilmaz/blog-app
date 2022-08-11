@@ -1,4 +1,4 @@
-import { Id, ILoginParams, IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, User } from 'types';
+import { Id, ILoginParams, IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, SinglePostRequestRoot, User } from 'types';
 import httpRequest from './fetcher';
 
 // Auth
@@ -42,7 +42,7 @@ export const getPosts = async () => {
 }
 
 export const getSinglePost = async (id: string) => {
-    return await httpRequest<Post>(
+    return await httpRequest<SinglePostRequestRoot>(
         {
             method: 'GET',
             url: `/posts/${id}`,

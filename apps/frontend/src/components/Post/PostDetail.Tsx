@@ -1,23 +1,18 @@
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import {
-    Heading, Image, Text, Box, Button, chakra, Flex, Link, Spacer, useColorModeValue
+    Heading, Image, Text, Box, chakra, Flex, Link, useColorModeValue, Stack
 } from "@chakra-ui/react";
-import React, { useEffect } from 'react'
-import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { fetchSinglePostThunk, selectPosts } from "redux/reducers/postReducer";
+import React from 'react'
+import { useAppSelector } from "redux/hooks";
+import { selectPosts } from "redux/reducers/postReducer";
 import fallbackImage from "../../assets/no-image.png";
 
 const PostDetail: React.FC = () => {
 
-    const dispatch = useAppDispatch();
     const selector = useAppSelector(selectPosts);
-    const { id } = useParams()
 
-    useEffect(() => {
-        if (selector.selectedId !== undefined)
-            dispatch(fetchSinglePostThunk("" + id));
-    })
+    const colorMode = useColorModeValue('gray.600', 'gray.100')
+
+
 
     return (
         <>
@@ -38,8 +33,8 @@ const PostDetail: React.FC = () => {
             </Center> */}
             <Flex maxW="900px" mx="auto" align="center" justify="center" px={5}>
                 <Box w="100%" py={5}>
-                    <Box py={6}>
-                        <Heading as="h1" size="xl" color={useColorModeValue('gray.600', 'gray.100')}>
+                    <Stack py={6} spacing={4}>
+                        <Heading as="h1" size="xl" color={colorMode}>
                             {selector.singlePost?.title}
                         </Heading>
                         <Heading
@@ -48,12 +43,12 @@ const PostDetail: React.FC = () => {
                             size="sm"
                             mt={2}
                             fontStyle="italic"
-                            color={useColorModeValue('gray.600', 'gray.100')}
+                            color={colorMode}
                         >
 
                         </Heading>
 
-                        <Box my={6}>
+                        <Box py={4}>
                             <Flex align="center">
                                 <Flex align="center" justify="between">
                                     <Image
@@ -64,9 +59,9 @@ const PostDetail: React.FC = () => {
                                         alt="Avatar"
                                     />
                                     <Flex align="flex-start" direction="column">
-                                        <Link mx={3} fontWeight="bold" color={useColorModeValue('gray.600', 'gray.100')}>
+                                        <Link mx={3} fontWeight="bold" color={colorMode}>
                                         </Link>
-                                        <chakra.span mx={3} fontSize="sm" color={useColorModeValue('gray.600', 'gray.100')}>
+                                        <chakra.span mx={3} fontSize="sm" color={colorMode}>
                                             deneme
                                         </chakra.span>
                                     </Flex>
@@ -74,18 +69,20 @@ const PostDetail: React.FC = () => {
                             </Flex>
                         </Box>
 
-                        <figure style={{ marginBottom: '2rem' }}>
+                        <Box h={'512px'} >
                             <Image
-                                w="100%"
+                                w={'100%'}
+                                h={'100%'}
+                                objectFit={'cover'}
                                 borderRadius="md"
                                 src={selector.singlePost?.image === undefined ? fallbackImage : selector.singlePost?.image}
                                 fallbackSrc={fallbackImage}
                             />
-                        </figure>
-                        <Text mt={4} fontSize="lg" color={useColorModeValue('gray.600', 'gray.100')}>
+                        </Box>
+                        <Text py={8} fontSize="lg" color={colorMode}>
                             {selector.singlePost?.body}
                         </Text>
-                    </Box>
+                    </Stack>
                 </Box>
             </Flex>
         </>
