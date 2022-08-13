@@ -54,7 +54,11 @@ function App() {
                 <ProfilePage />
               </ProtectedRoute>}
             />
-            <Route path='/add' element={<PostAddPage />} />
+            <Route path='/add' element={
+              <ProtectedRoute {...{ redirect: '/login', isAuth: false }}>
+                <PostAddPage />
+              </ProtectedRoute>}
+            />
           </Routes>
           <Footer />
         </BrowserRouter>

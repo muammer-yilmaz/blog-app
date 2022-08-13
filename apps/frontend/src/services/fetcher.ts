@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import toast from "react-hot-toast";
 //import toast from "react-hot-toast";
 
 const URL = process.env.BACKEND_URL || "http://localhost:5000"
@@ -16,11 +17,13 @@ const httpRequest = <T>(req: AxiosRequestConfig): Promise<T> => {
         } catch (e: any) {
             if (axios.isAxiosError(e)) {
                 const data: any = e.response?.data;
-                // console.log('data :>> ', data);
-                // toast.error(data.message)
-                // const message = /^(Error ).*$/gi
-                // console.log(message.exec("" + data.message))
-                // console.log('e.response?.data :>> ', data.message);
+                if (e.response?.status === 401) {
+                    toast.error("Authorization expired. Please login again!")
+                    localStorage.removeItem("token")
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500)
+                }
                 reject(data.message)
             }
             else {

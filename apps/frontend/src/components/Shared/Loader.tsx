@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 
-const loader = require('../../assets/loader.gif')
+import loader from '../../assets/loader.gif';
 
 interface IProps {
     // height: string | number | undefined,
