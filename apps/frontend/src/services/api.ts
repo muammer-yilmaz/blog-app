@@ -66,6 +66,21 @@ export const createPost = async (post: IPostParams) => {
     )
 }
 
+// User
+
+export const getUser = async (id: string) => {
+    return await httpRequest<User>(
+        {
+            method: 'GET',
+            url: '/users/getById',
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
+            data: id
+        }
+    )
+}
+
 
 
 

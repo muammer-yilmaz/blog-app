@@ -4,6 +4,7 @@ import UserService from './user.service';
 import validationMiddleware from '../../middlewares/validation.middleware';
 import userValidation from './user.validation';
 import HttpException from '../../utils/exceptions/http.exception';
+import authorizeMiddleware from '../../middlewares/authorize.middleware';
 
 class UserController implements Controller {
 
@@ -28,6 +29,10 @@ class UserController implements Controller {
 
         this.router.get(
             `${this.path}/getAll`, this.getAll);
+
+        this.router.post(
+            `${this.path}/getById`, authorizeMiddleware, this.getById
+        )
     }
 
     private create = async (req: Request, res: Response, next: NextFunction)
@@ -68,6 +73,20 @@ class UserController implements Controller {
             res.status(200).json({ users })
         } catch (error) {
             next(new HttpException(400, "user get error"));
+        }
+
+    }
+
+    private getById = async (req: Request, res: Response, next: NextFunction)
+        : Promise<Response | void> => {
+
+        try {
+
+            const { id } = req.body;
+            const user = await this.UserService.getById(id)
+            res.status(200).json({ user })
+        } catch (error: any) {
+            next(new HttpException(400, error))
         }
 
     }

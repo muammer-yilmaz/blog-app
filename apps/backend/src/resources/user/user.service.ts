@@ -54,6 +54,17 @@ class UserService {
         }
     }
 
+    public async getById(id: string) {
+        try {
+            const data = await this.user.find({
+                id: id
+            })
+            return data;
+        } catch (error: any) {
+            throw new Error(error);
+        }
+    }
+
 
 
 }

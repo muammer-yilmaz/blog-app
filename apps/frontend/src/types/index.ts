@@ -53,6 +53,10 @@ export interface IAuthReducer extends IToken, IReducer {
 
 }
 
+export interface IUserReducer extends IReducer {
+    user: Partial<User>
+}
+
 export interface ILoginParams {
     mail: string,
     password: string

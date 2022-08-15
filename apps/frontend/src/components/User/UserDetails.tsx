@@ -1,39 +1,82 @@
-import { Avatar, Box, Center, Container, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
-import React from "react";
+import { CheckIcon, EditIcon } from "@chakra-ui/icons";
+import { Avatar, Box, Button, ButtonGroup, Center, Container, FormControl, FormLabel, Input, Stack, useDisclosure } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { fetchUserThunk, selectUser } from "redux/reducers/userReducer";
+import { User } from "types";
 
 const UserDetails: React.FC = () => {
 
+    const [user, setUser] = useState<Partial<User>>({})
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { register, handleSubmit, formState: { errors } } = useForm<Partial<User>>();
+    const dispatch = useAppDispatch();
+    const selector = useAppSelector(selectUser)
+
+    // const handleEdit = () => {
+    //     onOpen
+    // }
+    const onSubmit = () => {
+        dispatch(fetchUserThunk())
+    }
+
+    useEffect(() => {
+        if (selector.status === 'success') {
+            setUser(selector.user)
+        }
+    }, [])
+
     return (
         <>
-            <Box >
+            <Box p={8} >
                 <Stack spacing={4}>
-                    <Box>
-                        <Avatar size={'2xl'} name="Muammer Yılmaz"
-                            src="https://avatars.githubusercontent.com/muammer-yilmaz" />
-                    </Box>
                     <Container>
-                        <Stack spacing={4} justify={'center'}>
-                            <FormControl>
-                                <FormLabel>Name</FormLabel>
-                                <Input type={'text'} />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Surname</FormLabel>
-                                <Input type={'text'} />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Mail</FormLabel>
-                                <Input type={'email'} />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Phone</FormLabel>
-                                <Input />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Name</FormLabel>
-                                <Input />
-                            </FormControl>
-                        </Stack>
+                        <Box textAlign={'center'}>
+                            <Avatar size={'2xl'} name="Muammer Yılmaz"
+                                src="https://avatars.githubusercontent.com/muammer-yilmaz" />
+                        </Box>
+                        <Box>
+                            <Stack spacing={4} justify={'center'}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <FormControl isDisabled={!isOpen}>
+                                        <FormLabel>Name</FormLabel>
+                                        <Input type={'text'} />
+                                    </FormControl>
+                                    <FormControl isDisabled={!isOpen}>
+                                        <FormLabel>Surname</FormLabel>
+                                        <Input type={'text'} />
+                                    </FormControl>
+                                    <FormControl isDisabled={true}>
+                                        <FormLabel>Mail</FormLabel>
+                                        <Input type={'email'} />
+                                    </FormControl>
+                                    <FormControl isDisabled={!isOpen}>
+                                        <FormLabel>Phone</FormLabel>
+                                        <Input />
+                                    </FormControl>
+                                    <FormControl isDisabled={!isOpen}>
+                                        <FormLabel>Name</FormLabel>
+                                        <Input />
+                                    </FormControl>
+                                    <Box textAlign={'right'}>
+                                        <ButtonGroup>
+                                            <Button leftIcon={<EditIcon />}
+                                                colorScheme={'blue'} onClick={isOpen ? onClose : onOpen}
+                                            >
+                                                Edit
+                                            </Button>
+                                            <Button leftIcon={<CheckIcon />}
+                                                colorScheme={'teal'}
+                                                type='submit'
+                                            >
+                                                Save
+                                            </Button>
+                                        </ButtonGroup>
+                                    </Box>
+                                </form>
+                            </Stack>
+                        </Box>
                     </Container>
                 </Stack>
             </Box>
