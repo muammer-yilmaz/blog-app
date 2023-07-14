@@ -17,7 +17,8 @@ export const fetchUserThunk = createAsyncThunk(
         try {
             const decoded: any = jwt_decode("" + localStorage.getItem("token"));
             const response = await getUser(decoded.id);
-            return response
+            console.log('response', response)
+            return response.user
         } catch (error) {
             return rejectWithValue(error)
         }
@@ -34,13 +35,15 @@ const userReducer = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUserThunk.pending, (state) => {
-            state.status = "loading"
+            state.status = "loading";
         }
-        ).addCase(fetchUserThunk.fulfilled, (state) => {
-            state.status = "success"
+        ).addCase(fetchUserThunk.fulfilled, (state, action) => {
+            state.status = "success";
+            state.user = action.payload;
+
         }
         ).addCase(fetchUserThunk.rejected, (state) => {
-            state.status = "failed"
+            state.status = "failed";
         }
         )
     }

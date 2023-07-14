@@ -62,6 +62,19 @@ class PostService {
         }
     }
 
+    public async getPostsByUserId(userId: string) {
+        try {
+            const posts = await this.post.find({
+                author: userId
+            })
+            return posts;
+        } catch (error: any) {
+            throw new Error('item delete error : ' + error)
+        }
+    }
+
+
+
 }
 
 export default PostService;

@@ -37,28 +37,28 @@ const UserDetails: React.FC = () => {
                                 src="https://avatars.githubusercontent.com/muammer-yilmaz" />
                         </Box>
                         <Box>
-                            <Stack spacing={4} justify={'center'}>
+                            <Stack spacing={6} justify={'center'}>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <FormControl isDisabled={!isOpen}>
                                         <FormLabel>Name</FormLabel>
-                                        <Input type={'text'} />
+                                        <Input type={'text'} value={selector.user.name} />
                                     </FormControl>
                                     <FormControl isDisabled={!isOpen}>
                                         <FormLabel>Surname</FormLabel>
-                                        <Input type={'text'} />
+                                        <Input type={'text'} value={selector.user.surname} />
                                     </FormControl>
                                     <FormControl isDisabled={true}>
                                         <FormLabel>Mail</FormLabel>
-                                        <Input type={'email'} />
+                                        <Input type={'email'} value={selector.user.mail} />
                                     </FormControl>
                                     <FormControl isDisabled={!isOpen}>
                                         <FormLabel>Phone</FormLabel>
-                                        <Input />
+                                        <Input value={selector.user.phone} />
                                     </FormControl>
-                                    <FormControl isDisabled={!isOpen}>
-                                        <FormLabel>Name</FormLabel>
-                                        <Input />
-                                    </FormControl>
+                                    {/* <FormControl isDisabled={!isOpen}>
+                                        <FormLabel>Created Date</FormLabel>
+                                        <Input value={selector.user.name} />
+                                    </FormControl> */}
                                     <Box textAlign={'right'}>
                                         <ButtonGroup>
                                             <Button leftIcon={<EditIcon />}

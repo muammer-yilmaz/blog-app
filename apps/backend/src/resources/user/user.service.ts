@@ -56,10 +56,10 @@ class UserService {
 
     public async getById(id: string) {
         try {
-            const data = await this.user.find({
-                id: id
-            })
-            return data;
+            const data = await this.user.where({
+                _id: id
+            }).exec()
+            return data[0];
         } catch (error: any) {
             throw new Error(error);
         }

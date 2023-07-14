@@ -28,6 +28,8 @@ class PostController implements Controller {
 
         this.router.delete(`${this.path}/delete`, authorizeMiddleware, this.deletePost);
 
+        this.router.get(`${this.path}/getpostsbyuserid`, this.getPostsByUserId);
+
     }
 
     private create = async (req: Request, res: Response, next: NextFunction)
@@ -81,6 +83,18 @@ class PostController implements Controller {
             await this.PostService.deleteItem(id)
 
             res.status(204);
+        } catch (error: any) {
+            next(new HttpException(404, `item doesn't exist` + error));
+        }
+    }
+
+    private getPostsByUserId = async (req: Request, res: Response, next: NextFunction)
+        : Promise<Response | void> => {
+        try {
+            const { id } = req.body;
+            const posts = await this.PostService.getPostsByUserId(id);
+
+            res.status(200).send({ posts });
         } catch (error: any) {
             next(new HttpException(404, `item doesn't exist` + error));
         }

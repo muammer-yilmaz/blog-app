@@ -81,9 +81,7 @@ class UserController implements Controller {
         : Promise<Response | void> => {
 
         try {
-
-            const { id } = req.body;
-            const user = await this.UserService.getById(id)
+            const user = await this.UserService.getById(req.body.id)
             res.status(200).json({ user })
         } catch (error: any) {
             next(new HttpException(400, error))

@@ -6,6 +6,7 @@ export interface Id {
 }
 
 export interface User extends IUser, Id {
+    __v: number;
 }
 
 export interface Post extends IPost, Id {
@@ -20,6 +21,10 @@ export interface PostRequestRoot {
 
 export interface SinglePostRequestRoot {
     post: Post;
+}
+
+export interface UserRequestRoot {
+    user: User
 }
 
 export interface IToken {

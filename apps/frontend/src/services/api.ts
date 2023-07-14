@@ -1,4 +1,4 @@
-import { Id, ILoginParams, IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, SinglePostRequestRoot, User } from 'types';
+import { Id, ILoginParams, IPostParams, IResgisterParams, IToken, Post, PostRequestRoot, SinglePostRequestRoot, User, UserRequestRoot } from 'types';
 import httpRequest from './fetcher';
 
 // Auth
@@ -69,14 +69,14 @@ export const createPost = async (post: IPostParams) => {
 // User
 
 export const getUser = async (id: string) => {
-    return await httpRequest<User>(
+    return await httpRequest<UserRequestRoot>(
         {
-            method: 'GET',
+            method: 'POST',
             url: '/users/getById',
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             },
-            data: id
+            data: { id: id }
         }
     )
 }
